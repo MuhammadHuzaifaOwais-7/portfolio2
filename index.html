@@ -40,6 +40,7 @@
       --bg-gradient-1: #fafbfc;
       --bg-gradient-2: #f0f4f8;
       --bg-gradient-3: #e9ecf1;
+      transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     }
 
     /* Blue Theme - Deep Ocean Professional */
@@ -55,6 +56,7 @@
       --bg-gradient-1: #051a2f;
       --bg-gradient-2: #082849;
       --bg-gradient-3: #040f1a;
+      transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     }
 
     /* Purple Theme - Elegant & Sophisticated */
@@ -70,6 +72,7 @@
       --bg-gradient-1: #2e1065;
       --bg-gradient-2: #3730a3;
       --bg-gradient-3: #16213e;
+      transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     }
 
     /* Green Theme - Modern & Fresh */
@@ -85,6 +88,7 @@
       --bg-gradient-1: #143d35;
       --bg-gradient-2: #164e43;
       --bg-gradient-3: #0a2620;
+      transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease;
     }
 
     html {
@@ -208,10 +212,10 @@
 
     .theme-btn {
       background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 2px solid color-mix(in srgb, var(--primary) 30%, transparent);
       color: var(--text-primary);
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 0.5rem;
       cursor: pointer;
       display: flex;
@@ -219,11 +223,18 @@
       justify-content: center;
       transition: all 0.3s ease;
       font-size: 1.2rem;
+      box-shadow: 0 0 15px color-mix(in srgb, var(--primary) 30%, transparent);
     }
 
     .theme-btn:hover {
       border-color: var(--primary);
-      background: color-mix(in srgb, var(--primary) 20%, transparent);
+      background: color-mix(in srgb, var(--primary) 25%, transparent);
+      box-shadow: 0 0 25px color-mix(in srgb, var(--primary) 50%, transparent);
+      transform: scale(1.05);
+    }
+
+    .theme-btn:active {
+      transform: scale(0.95);
     }
 
     .theme-menu {
@@ -231,15 +242,17 @@
       top: 100%;
       right: 0;
       background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 0.5rem;
-      margin-top: 0.5rem;
+      border: 2px solid color-mix(in srgb, var(--primary) 40%, transparent);
+      border-radius: 0.75rem;
+      margin-top: 0.75rem;
       display: none;
       flex-direction: column;
       gap: 0;
-      min-width: 150px;
+      min-width: 160px;
       z-index: 1000;
       backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px color-mix(in srgb, var(--primary) 30%, transparent);
+      animation: slideUpIn 0.3s ease-out;
     }
 
     .theme-menu.show {
@@ -247,7 +260,7 @@
     }
 
     .theme-option {
-      padding: 0.75rem 1rem;
+      padding: 0.875rem 1.25rem;
       cursor: pointer;
       transition: all 0.3s ease;
       border: none;
@@ -255,23 +268,42 @@
       color: var(--text-primary);
       text-align: left;
       font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-bottom: 1px solid color-mix(in srgb, var(--primary) 10%, transparent);
+      position: relative;
+      overflow: hidden;
     }
 
     .theme-option:last-child {
       border-bottom: none;
     }
 
+    .theme-option::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 3px;
+      background: var(--primary);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
     .theme-option:hover {
-      background: color-mix(in srgb, var(--primary) 20%, transparent);
+      background: color-mix(in srgb, var(--primary) 15%, transparent);
       color: var(--primary);
     }
 
     .theme-option.active {
-      background: color-mix(in srgb, var(--primary) 30%, transparent);
+      background: color-mix(in srgb, var(--primary) 25%, transparent);
       color: var(--primary);
-      font-weight: 600;
+      font-weight: 700;
+    }
+
+    .theme-option.active::before {
+      opacity: 1;
     }
 
     /* Utility Classes */
@@ -476,40 +508,48 @@
       border-radius: 0.5rem;
       border: none;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
       font-family: 'Inter', sans-serif;
+      position: relative;
+      z-index: 1;
     }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: #fff;
       font-weight: 700;
-      box-shadow: 0 8px 32px color-mix(in srgb, var(--primary) 40%, transparent);
+      box-shadow: 0 8px 24px color-mix(in srgb, var(--primary) 40%, transparent);
     }
 
     .btn-primary:hover {
-      box-shadow: 0 12px 48px color-mix(in srgb, var(--primary) 60%, transparent);
-      transform: translateY(-3px);
-      filter: brightness(1.1);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px color-mix(in srgb, var(--primary) 60%, transparent);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
     }
 
     .btn-secondary {
       background: color-mix(in srgb, var(--primary) 10%, transparent);
       border: 2px solid var(--primary);
       color: var(--primary);
-      box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 30%, transparent);
+      box-shadow: 0 0 15px color-mix(in srgb, var(--primary) 30%, transparent);
     }
 
     .btn-secondary:hover {
-      border-color: var(--primary);
       background: color-mix(in srgb, var(--primary) 20%, transparent);
-      box-shadow: 0 0 30px color-mix(in srgb, var(--primary) 50%, transparent);
       transform: translateY(-2px);
+      box-shadow: 0 0 30px color-mix(in srgb, var(--primary) 50%, transparent);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(0);
     }
 
     .social-links {
@@ -1280,7 +1320,7 @@
     .btn-primary,
     .btn-secondary {
       position: relative;
-      overflow: visible;
+      overflow: hidden;
     }
 
     .btn-primary::before,
@@ -1291,9 +1331,9 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: left 0.6s ease;
-      z-index: 1;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+      transition: left 0.5s ease;
+      z-index: 0;
       border-radius: 0.5rem;
     }
 
@@ -1302,50 +1342,10 @@
       left: 100%;
     }
 
-    .btn-primary,
-    .btn-secondary {
-      z-index: 0;
-    }
-
-    /* Loading dots on button hover */
-    .btn-primary::after,
-    .btn-secondary::after {
-      content: '';
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 6px;
-      height: 6px;
-      background: currentColor;
-      border-radius: 50%;
-      opacity: 0;
-      display: none;
-    }
-
-    .btn-primary.loading::after,
-    .btn-secondary.loading::after {
-      display: block;
-      animation: loadingDot 1.4s infinite;
-    }
-
-    .btn-primary.loading::before,
-    .btn-secondary.loading::before {
-      content: '';
-      position: absolute;
-      right: 25px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 6px;
-      height: 6px;
-      background: currentColor;
-      border-radius: 50%;
-      opacity: 0;
-      animation: loadingDot 1.4s 0.2s infinite;
-    }
-
-    .btn-primary.loading::before {
-      animation: loadingDot 1.4s 0.2s infinite;
+    .btn-primary > *,
+    .btn-secondary > * {
+      position: relative;
+      z-index: 2;
     }
 
     /* Text Gradient Animation */
@@ -1415,6 +1415,163 @@
       animation: slideUpIn 0.8s ease-out forwards;
     }
 
+    /* Education Timeline */
+    .education {
+      background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--primary) 5%, transparent), transparent);
+    }
+
+    .education-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--primary), transparent);
+    }
+
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 30px;
+      }
+    }
+
+    .timeline-item {
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      margin-left: 0;
+      margin-right: auto;
+      width: calc(50% - 40px);
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-left: auto;
+      margin-right: 0;
+      width: calc(50% - 40px);
+      text-align: left;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        width: calc(100% - 100px);
+        margin-left: 80px !important;
+        margin-right: 0 !important;
+        text-align: left !important;
+      }
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--primary);
+      border: 4px solid var(--bg-dark);
+      border-radius: 50%;
+      z-index: 10;
+      box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 70%, transparent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-dot {
+        left: 30px;
+      }
+    }
+
+    .timeline-year {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 30px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-year {
+        left: auto;
+        right: auto;
+        transform: none;
+        top: -30px;
+        left: 30px;
+      }
+    }
+
+    .timeline-content {
+      background: var(--bg-card);
+      border: 2px solid color-mix(in srgb, var(--primary) 30%, transparent);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      backdrop-filter: blur(10px);
+      margin-top: 2rem;
+    }
+
+    .timeline-content:hover {
+      border-color: var(--primary);
+      background: color-mix(in srgb, var(--bg-card) 100%, var(--primary) 10%);
+      box-shadow: 0 0 30px color-mix(in srgb, var(--primary) 40%, transparent);
+      transform: translateY(-8px) scale(1.02);
+    }
+
+    .timeline-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .timeline-description {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .timeline-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1.2rem;
+      background: color-mix(in srgb, var(--primary) 20%, transparent);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .timeline-link:hover {
+      background: var(--primary);
+      color: var(--bg-dark);
+      transform: translateX(4px);
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .container {
@@ -1454,11 +1611,12 @@
       <div class="nav-brand">HUZAIFA</div>
       <div style="display: flex; align-items: center; gap: 2rem;">
         <div class="nav-links">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Work</a>
-          <a href="#contact">Contact</a>
-        </div>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Work</a>
+        <a href="#contact">Contact</a>
+      </div>
         <div class="theme-switcher">
           <button class="theme-btn" id="themeBtn" title="Change theme">🎨</button>
           <div class="theme-menu" id="themeMenu">
@@ -1643,6 +1801,57 @@
           </div>
           <div class="progress-bar">
             <div class="progress-fill" style="width: 96%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" class="education">
+    <div class="container">
+      <div class="education-header">
+        <h2>
+          <span>My</span>
+          <span class="gradient-text">Education</span>
+        </h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2020</div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Primary</h3>
+            <p class="timeline-description">Successfully completed primary education with a 90% score and consistent top rankings.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2024</div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Diploma</h3>
+            <p class="timeline-description">Started a diploma in Software Engineering (completed 1st semester). Will continue after Matric.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2025</div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">High School / Secondary</h3>
+            <p class="timeline-description">Currently pursuing high school studies while enhancing technical skills in design and development.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2028</div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Projects</h3>
+            <p class="timeline-description">I have completed several projects, showcasing practical application of my skills and knowledge.</p>
+            <a href="#projects" class="timeline-link">View Projects →</a>
           </div>
         </div>
       </div>
@@ -1983,33 +2192,33 @@
       });
     });
 
-    // Theme Switcher
+    // Theme Switcher - Fixed Version
     const themeBtn = document.getElementById('themeBtn');
     const themeMenu = document.getElementById('themeMenu');
     const themeOptions = document.querySelectorAll('.theme-option');
-    const html = document.documentElement;
 
     // Initialize theme from localStorage
     function initTheme() {
       const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
-      setTheme(savedTheme);
+      applyTheme(savedTheme);
     }
 
-    // Set theme function
-    function setTheme(themeName) {
-      // Remove all theme classes
-      document.body.classList.remove('theme-light', 'theme-blue', 'theme-purple', 'theme-green');
+    // Apply theme function
+    function applyTheme(themeName) {
+      // Remove all theme classes from body
+      document.body.classList.remove('theme-light', 'theme-blue', 'theme-purple', 'theme-green', 'theme-dark');
 
-      // Add active theme class if not dark (dark is default)
+      // Add the selected theme class (even for dark, so we can track it)
       if (themeName !== 'dark') {
         document.body.classList.add(`theme-${themeName}`);
       }
 
-      // Update active button
+      // Update active button state
       themeOptions.forEach(option => {
-        option.classList.remove('active');
         if (option.dataset.theme === themeName) {
           option.classList.add('active');
+        } else {
+          option.classList.remove('active');
         }
       });
 
@@ -2018,29 +2227,39 @@
 
       // Close menu
       themeMenu.classList.remove('show');
+
+      // Log for debugging
+      console.log('Theme changed to:', themeName);
     }
 
-    // Theme button click
-    themeBtn.addEventListener('click', () => {
+    // Theme button click to toggle menu
+    themeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       themeMenu.classList.toggle('show');
     });
 
     // Theme option click
     themeOptions.forEach(option => {
-      option.addEventListener('click', () => {
+      option.addEventListener('click', (e) => {
+        e.stopPropagation();
         const themeName = option.dataset.theme;
-        setTheme(themeName);
+        applyTheme(themeName);
       });
     });
 
-    // Close theme menu when clicking outside
+    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.theme-switcher')) {
         themeMenu.classList.remove('show');
       }
     });
 
-    // Initialize on page load
+    // Prevent menu from closing when clicking inside it
+    themeMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Initialize theme on page load
     initTheme();
 
     // Profile Image Handler
@@ -2131,20 +2350,21 @@
       });
     });
 
-    // Magnetic button effect
-    const buttons = document.querySelectorAll('.btn, .social-icon, .contact-card, .project-card');
+    // Subtle magnetic effect on cards (not buttons to avoid conflicts)
+    const magneticElements = document.querySelectorAll('.stat-card, .skill-item, .social-icon, .contact-card, .project-card, .timeline-content');
 
-    buttons.forEach(button => {
-      button.addEventListener('mousemove', (e) => {
-        const rect = button.getBoundingClientRect();
+    magneticElements.forEach(element => {
+      element.addEventListener('mousemove', (e) => {
+        const rect = element.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
 
-        button.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+        // Very subtle effect - reduce movement
+        element.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
       });
 
-      button.addEventListener('mouseleave', () => {
-        button.style.transform = '';
+      element.addEventListener('mouseleave', () => {
+        element.style.transform = '';
       });
     });
 
@@ -2168,15 +2388,20 @@
       delay += 0.05;
     });
 
-    // Button loading effect on hover
-    const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
-    buttons.forEach(btn => {
-      btn.addEventListener('mouseenter', () => {
-        btn.classList.add('loading');
-      });
-
-      btn.addEventListener('mouseleave', () => {
-        btn.classList.remove('loading');
+    // Button interaction tracking (for smooth experience)
+    const ctaButtons = document.querySelectorAll('.btn-primary, .btn-secondary');
+    ctaButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Smooth scroll to target
+        const target = btn.getAttribute('href');
+        if (target && target.startsWith('#')) {
+          const element = document.querySelector(target);
+          if (element) {
+            setTimeout(() => {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+          }
+        }
       });
     });
   </script>
